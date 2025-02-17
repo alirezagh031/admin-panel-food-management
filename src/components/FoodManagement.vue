@@ -63,7 +63,7 @@ const enableUpdate = ref(false);
 const enablePost = ref(false);
 const getPosts = async () => {
   axios
-    .get(`http://192.168.17.52:8585/api/add-food/?page=${page.value}`)
+    .get(`/api/add-food/?page=${page.value}`)
     .then((response) => {
       posts.value = response.data.results;
       while (posts.value.length < 10) {
@@ -78,7 +78,7 @@ getPosts();
 const postFood = async () => {
   enablePost.value = false;
   try {
-    await axios.post("http://192.168.17.52:8585/api/add-food/", {
+    await axios.post("/api/add-food/", {
       name: name.value,
     });
     name.value = "";
@@ -95,7 +95,7 @@ const setPage = (p: number) => {
 
 const deleteFood = async () => {
   try {
-    await axios.delete(`http://192.168.17.52:8585/api/add-food/${id.value}/`);
+    await axios.delete(`/api/add-food/${id.value}/`);
   } catch (error) {
     console.error("Error deleting food:", error);
   }
@@ -105,7 +105,7 @@ const deleteFood = async () => {
 const updateFood = async () => {
   enableUpdate.value = false;
   try {
-    await axios.patch(`http://192.168.17.52:8585/api/add-food/${id.value}/`, {
+    await axios.patch(`/api/add-food/${id.value}/`, {
       name: changedName.value,
     });
     getPosts();
