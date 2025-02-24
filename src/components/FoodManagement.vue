@@ -214,6 +214,7 @@ const cancelEditing = () => {
   color: #333;
 }
 
+
 .pagination {
   display: flex;
   justify-content: center;
