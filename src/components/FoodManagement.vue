@@ -320,38 +320,70 @@ const cancelEditing = () => {
 .food-form {
   margin-top: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+  height: 60px;
+  margin: auto;
 }
 
 .food-form input {
-  padding: 6px 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 90%;
+  height: 15px;
+  padding: 5px;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.food-form input:focus {
+  border-color: #2e7d32;
+  background-color: white;
+  box-shadow: 0 0 8px rgba(46, 125, 50, 0.6);
 }
 
 .food-form button {
-  padding: 6px 12px;
-  background-color: #28a745;
-  color: #fff;
+  width: 40%;
+  min-height: 28px;
+  background-color: #4CAF50;
+  color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
-.post-button {
-  text-align: center;
-  margin: 20px 0;
-  width: 120px;
-  height: 40px;
-  background-color: #ddd;
-  color: black;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+
 .food-form button:hover {
-  background-color: #218838;
+  background-color: #388E3C;
+  transform: scale(1.05);
 }
+
+.post-button {
+  display: block;
+  margin: 40px auto;
+  width: 130px;
+  height: 40px;
+  background: linear-gradient(135deg, #4CAF50, #388E3C);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.post-button:hover {
+  background: linear-gradient(135deg, #388E3C, #2E7D32);
+  transform: scale(1.1);
+}
+
 </style>
