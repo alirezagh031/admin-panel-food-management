@@ -1,19 +1,8 @@
-<script setup lang="ts">
-import FoodManagement from './components/FoodManagement.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-    <div class="wrapper">
-      <FoodManagement />
-    </div>
+    <router-view />
 </template>
 
 <style scoped>
-.wrapper{
-  background-color: white;
-  width: 500px;
-  color: black;]
-  border: none;
-  border-radius: 10px;
-}
 </style>
