@@ -72,6 +72,9 @@
 <script setup lang="ts">
 import { defineProps, ref } from "vue";
 import axios from "axios";
+import { useAuthStore } from '../stores/authStore';
+
+const authStore = useAuthStore();
 
 defineProps<{
   msg: string;
@@ -86,26 +89,47 @@ const id = ref(null);
 const pageSize = ref(0);
 const enableUpdate = ref(false);
 const enablePost = ref(false);
+console.log(authStore.accessToken);
 const getPosts = async () => {
-  axios
-    .get(`http://192.168.17.52:8585/api/add-food/?page=${page.value}`)
-    .then((response) => {
-      posts.value = response.data.results;
-      while (posts.value.length < 10) {
-        posts.value.push({ id: null, name: " " });
-      }
-      pageSize.value = Math.ceil(response.data.count / 10);
+  try {
+    const response = await axios.get(`http://192.168.17.52:8585/api/add-food/?page=${page.value}`, {
+      headers: {
+        Authorization: `JWT ${authStore.accessToken}`,
+      },
     });
+
+    posts.value = response.data.results.map(post => ({
+      id: post.id,
+      name: post.name,
+    }));
+
+    while (posts.value.length < 10) {
+      posts.value.push({ id: null, name: " " });
+    }
+
+    pageSize.value = Math.ceil(response.data.count / 10);
+  } catch (error) {
+    console.error("خطا در دریافت پست‌ها:", error);
+  }
 };
+
 
 getPosts();
 
 const postFood = async () => {
   enablePost.value = false;
   try {
-    await axios.post("http://192.168.17.52:8585/api/add-food/", {
-      name: name.value,
-    });
+    await axios.post(
+      "http://192.168.17.52:8585/api/add-food/",
+      {
+        name: name.value,
+      },
+      {
+        headers: {
+          Authorization: `JWT ${authStore.accessToken}`,
+        },
+      }
+    );
     name.value = "";
     getPosts();
   } catch (error) {
@@ -120,11 +144,15 @@ const setPage = (p: number) => {
 
 const deleteFood = async (id1: number) => {
   try {
-    await axios.delete(`http://192.168.17.52:8585/api/add-food/${id1}/`);
+    await axios.delete(`http://192.168.17.52:8585/api/add-food/${id1}/`, {
+      headers: {
+        Authorization: `JWT ${authStore.accessToken}`,
+      },
+    });
+    getPosts();
   } catch (error) {
     console.error("Error deleting food:", error);
   }
-  getPosts();
 };
 
 const startEditing = (postId: number, currentName: string) => {
@@ -135,9 +163,17 @@ const startEditing = (postId: number, currentName: string) => {
 const updateFood = async (postId: number) => {
   if (!changedName.value.trim()) return;
   try {
-    await axios.patch(`http://192.168.17.52:8585/api/add-food/${postId}/`, {
-      name: changedName.value,
-    });
+    await axios.patch(
+      `http://192.168.17.52:8585/api/add-food/${postId}/`,
+      {
+        name: changedName.value,
+      },
+      {
+        headers: {
+          Authorization: `JWT ${authStore.accessToken}`,
+        },
+      }
+    );
     getPosts();
     editingId.value = null;
   } catch (error) {
