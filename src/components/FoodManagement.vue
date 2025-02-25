@@ -1,6 +1,7 @@
 <template>
   <div class="body">
     <div class="container">
+      <button class="back-button" @click="goBack">خروچ</button>
       <ul class="post-list">
         <li v-for="(post, index) in posts" :key="index">
           <span v-if="editingId !== post.id">{{ post.name }}</span>
@@ -75,10 +76,6 @@ import axios from "axios";
 import { useAuthStore } from '../stores/authStore';
 
 const authStore = useAuthStore();
-
-defineProps<{
-  msg: string;
-}>();
 
 const posts = ref([]);
 const name = ref("");
@@ -184,6 +181,10 @@ const cancelEditing = () => {
   editingId.value = null;
   changedName.value = "";
 };
+
+const goBack = () => {
+  window.location.href = "/";
+};
 </script>
 
 <style scoped>
@@ -192,6 +193,24 @@ const cancelEditing = () => {
   src: url("@/assets/IRAN(FaNum).ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #db2d2d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #a80000;
+  transform: scale(1.1);
 }
 
 .body {

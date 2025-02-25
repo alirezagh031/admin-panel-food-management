@@ -88,7 +88,7 @@ export default {
 
           if (response.status === 200) {
             authStore.setTokens(response.data.access, response.data.refresh);
-            router.push("/food");
+            router.push("/foods");
           }
         } catch (error) {
           alert("خطا در ورود! لطفاً دوباره تلاش کنید.");
