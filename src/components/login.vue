@@ -106,7 +106,7 @@ export default {
 <style scoped>
 
 .today {
-  background: rgba(234, 88, 12, 0.4);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .login-title {
@@ -145,7 +145,6 @@ export default {
   background-color: #269b2b;
 }
 
-/* نمایش تاریخ */
 .date-box {
   margin-top: 20px;
   font-size: 14px;
@@ -170,7 +169,6 @@ export default {
   position: relative;
 }
 
-/* طرح بندی صفحه */
 .grid-container {
   display: flex;
   justify-content: center;
@@ -180,7 +178,6 @@ export default {
   z-index: 10;
 }
 
-/* جعبه ورود */
 .login-container {
   display: flex;
   justify-content: center;
@@ -200,7 +197,6 @@ export default {
   text-align: center;
 }
 
-/* پس‌زمینه */
 .background-image {
   position: absolute;
   top: 0;
